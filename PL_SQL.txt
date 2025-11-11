@@ -1,0 +1,171 @@
+PL SQL
+
+1. ANONYMOUS BLOCK
+2. NAMES BLOCK
+    - PROCEDURE
+    - TRIGGER
+    - PACKAGE
+    - FUNCTION
+
+==========================
+ANONYMOUS BLOCK STRUCTURE
+==========================
+DECLARE              --  Optional
+
+BEGIN                --  Mandatory
+  EXCEPTION          --  Optional
+END;                 --  Mandatory
+/
+
+
+Basic Program
+======================
+SET SERVEROUTPUT ON ;
+
+BEGIN
+    dbms_output.put_line('Hello') ;
+END;
+/
+
+
+Add Two Numbers
+================
+Declare
+
+num1 Number := 1  ;   // Assignment Operator :=
+num2 Number := 5  ;
+
+BEGIN
+
+  dbms_output.put_line('Sum : '||(num1 + num2)) ;
+
+END;
+/
+
+
+Rounding off Concept
+1. If Decimal is not declared in variable size
+==============================================
+Declare
+
+num1 Number(10) := 10.5  ;
+num2 Number(10) := 20.4  ;
+
+BEGIN
+
+  dbms_output.put_line('Sum of '||num1||' and '||num2||' is : '||(num1 + num2)) ;
+
+END;
+/
+
+Output :
+Sum of 11 and 20 is : 31
+
+
+PL/SQL procedure successfully completed.
+
+1. If Decimal size declared in variable size
+=============================================
+Declare
+
+num1 Number(10,2) := 10.5  ;
+num2 Number(10,2) := 20.4  ;
+
+BEGIN
+
+  dbms_output.put_line('Sum of '||num1||' and '||num2||' is : '||(num1 + num2)) ;
+
+END;
+/
+
+Run time Variable Input
+=======================
+
+Declare
+
+num1 Number(10,2) := &num1  ;
+num2 Number(10,2) := &num1  ;
+
+BEGIN
+
+  dbms_output.put_line('Sum of '||num1||' and '||num2||' is : '||(num1 + num2)) ;
+
+END;
+/
+
+Ovverride variable value
+========================
+Declare
+
+num1 Number(10,2) := 100  ;
+num2 Number(10,2) := 200  ;
+
+BEGIN
+
+num1 := 1 ;
+num2 := 2 ;
+
+  dbms_output.put_line('Sum of '||num1||' and '||num2||' is : '||(num1 + num2)) ;
+
+END;
+/
+
+Output :
+Sum of 1 and 2 is : 3
+
+
+PL/SQL procedure successfully completed.
+
+
+// Constant concept
+===================================
+Declare
+
+num1 constant Number(10,2) := 100  ;
+num2 Number(10,2) := 200  ;
+
+BEGIN
+
+num1 := 1 ;
+num2 := 2 ;
+
+  dbms_output.put_line('Sum of '||num1||' and '||num2||' is : '||(num1 + num2)) ;
+
+END;
+/
+
+Output:
+num1 := 1 ;
+*
+ERROR at line 8:
+ORA-06550: line 8, column 1:
+PLS-00363: expression 'NUM1' cannot be used as an assignment target
+ORA-06550: line 8, column 1:
+PL/SQL: Statement ignored
+
+
+Variable Not Null Concept
+==========================
+
+Declare
+
+num1 constant Number(10,2) := 100  ;
+num2 Number(10,2) not null := 0  ;
+
+BEGIN
+
+-- num1 := 1 ;
+num2 :=  null ;
+
+  dbms_output.put_line('Sum of '||num1||' and '||num2||' is : '||(num1 + num2)) ;
+
+END;
+/
+
+---------------------------------------------------
+Note : Syntrax check
+
+constant    variable_name constant datatype ;
+not null    variable_name datatype not null ;
+
+---------------------------------------------------
